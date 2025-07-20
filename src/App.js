@@ -266,7 +266,7 @@ const App = () => {
 
   // Derivar estados de coma y estupor para facilitar la lógica y renderizado
   const isComaState = consciousnessLevel1A === 3;
-  const isStuporState = consciousnessLevelLevel1A === 2;
+  const isStuporState = consciousnessLevel1A === 2; // Corregido: 'consciousnessLevelLevel1A' a 'consciousnessLevel1A'
 
   // Lista de ítems que se auto-llenan con "Coma"
   const autoFillComaItems = ['1B', '1C', '4', '5A', '5B', '6A', '6B', '7', '8', '9', '10', '11'];
