@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/rafuk97/nihsscalc/static/css/main.f855e6bc.css",
+    "main.js": "/rafuk97/nihsscalc/static/js/main.6820d43e.js",
+    "static/js/453.0398fda6.chunk.js": "/rafuk97/nihsscalc/static/js/453.0398fda6.chunk.js",
+    "static/media/logo.svg": "/rafuk97/nihsscalc/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/rafuk97/nihsscalc/index.html",
+    "main.f855e6bc.css.map": "/rafuk97/nihsscalc/static/css/main.f855e6bc.css.map",
+    "main.6820d43e.js.map": "/rafuk97/nihsscalc/static/js/main.6820d43e.js.map",
+    "453.0398fda6.chunk.js.map": "/rafuk97/nihsscalc/static/js/453.0398fda6.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f855e6bc.css",
+    "static/js/main.6820d43e.js"
+  ]
+}
