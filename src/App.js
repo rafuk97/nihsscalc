@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-import logo from './logo.svg';
-import './App.css';
 
 function App() {
   return (
@@ -22,7 +19,7 @@ function App() {
     </div>
   );
 }
-=======
+
 import React, { useState, useEffect, useRef } from 'react';
 
 // Define los ítems del NIHSS con sus opciones, puntajes e instrucciones detalladas
@@ -670,6 +667,6 @@ const App = () => {
     </div>
   );
 };
->>>>>>> 2093006d713f8eac727bbd33639c3155e599f20b
+
 
 export default App;
