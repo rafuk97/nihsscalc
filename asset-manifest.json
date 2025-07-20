@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/nihsscalc/static/css/main.e6c13ad2.css",
-    "main.js": "/nihsscalc/static/js/main.ce5a1d5a.js",
+    "main.js": "/nihsscalc/static/js/main.7340deee.js",
     "static/js/453.0398fda6.chunk.js": "/nihsscalc/static/js/453.0398fda6.chunk.js",
     "index.html": "/nihsscalc/index.html",
     "main.e6c13ad2.css.map": "/nihsscalc/static/css/main.e6c13ad2.css.map",
-    "main.ce5a1d5a.js.map": "/nihsscalc/static/js/main.ce5a1d5a.js.map",
+    "main.7340deee.js.map": "/nihsscalc/static/js/main.7340deee.js.map",
     "453.0398fda6.chunk.js.map": "/nihsscalc/static/js/453.0398fda6.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.ce5a1d5a.js"
+    "static/js/main.7340deee.js"
   ]
 }
