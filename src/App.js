@@ -171,6 +171,9 @@ const nihssItems = [
       { optionValue: '9_3_coma', scoreValue: 3, label: '3: Coma' },
     ],
     // RUTAS DE IMAGEN ACTUALIZADAS PARA CARPETA LOCAL EN PUBLIC/IMAGES
+    // ¡IMPORTANTE! Asegúrate de que los nombres de archivo en tu carpeta public/images/
+    // coincidan EXACTAMENTE con estos (incluyendo mayúsculas/minúsculas).
+    // Por ejemplo, si tu archivo se llama "Image.png", cámbialo a "image.png" o viceversa.
     image: '/images/image.png', // Tarea 1 del ítem 9
     image2: '/images/image1.png', // Tarea 2 del ítem 9
     image3: '/images/image2.png', // Tarea 3 del ítem 9
@@ -188,6 +191,9 @@ const nihssItems = [
       { optionValue: '10_NA', scoreValue: 'NA', label: 'NA: IOT/barrera física', isPrimary: true },
     ],
     // RUTA DE IMAGEN ACTUALIZADA PARA CARPETA LOCAL EN PUBLIC/IMAGES
+    // ¡IMPORTANTE! Asegúrate de que el nombre de archivo en tu carpeta public/images/
+    // coincida EXACTAMENTE con este (incluyendo mayúsculas/minúsculas).
+    // Por ejemplo, si tu archivo se llama "Image3.png", cámbialo a "image3.png" o viceversa.
     image: '/images/image3.png', // Imagen del ítem 10
   },
   {
@@ -260,7 +266,7 @@ const App = () => {
 
   // Derivar estados de coma y estupor para facilitar la lógica y renderizado
   const isComaState = consciousnessLevel1A === 3;
-  const isStuporState = consciousnessLevel1A === 2;
+  const isStuporState = consciousnessLevelLevel1A === 2;
 
   // Lista de ítems que se auto-llenan con "Coma"
   const autoFillComaItems = ['1B', '1C', '4', '5A', '5B', '6A', '6B', '7', '8', '9', '10', '11'];
@@ -543,6 +549,7 @@ const App = () => {
                     alt={`Imagen de ${currentItem.name} Tarea 1`}
                     className="max-w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-200 hover:scale-[1.02]"
                     onClick={() => setFullScreenImageUrl(currentItem.image)}
+                    // Fallback para imagen no disponible, usando texto en español
                     onError={(e) => e.target.src = `https://placehold.co/600x400/374151/F9FAFB?text=Imagen+No+Disponible`}
                   />
                   {currentItem.image2 && <img
