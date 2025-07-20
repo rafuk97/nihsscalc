@@ -1,25 +1,3 @@
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
 import React, { useState, useEffect, useRef } from 'react';
 
 // Define los ítems del NIHSS con sus opciones, puntajes e instrucciones detalladas
@@ -270,7 +248,8 @@ const App = () => {
   // Referencia para el modal de informe
   const reportModalRef = useRef(null);
   // Estado para el índice del ítem actual que se muestra
-  const [currentItemIndex, setCurrentItemIndex] = useState(0);
+  const [currentItemIndex, setCurrentItem] = useState(0); // Renamed for clarity
+
   // Estado para la URL de la imagen a mostrar en pantalla completa
   const [fullScreenImageUrl, setFullScreenImageUrl] = useState(null);
 
@@ -403,7 +382,7 @@ const App = () => {
 
         // If the next item is NOT auto-filled by either coma or stupor, then it's a manual item.
         if (!isNextItemAutoFilledByComa && !isNextItemAutoFilledByStupor) {
-          setCurrentItemIndex(nextIndex);
+          setCurrentItem(nextIndex); // Use setCurrentItem
           foundNextManualItem = true;
           break; // Exit the loop once a manual item is found
         }
@@ -414,10 +393,10 @@ const App = () => {
     // If no specific auto-fill jump happened (either not in coma/stupor, or all subsequent items are auto-filled)
     if (!foundNextManualItem) {
       if (nextIndex < nihssItems.length) {
-        setCurrentItemIndex(nextIndex);
+        setCurrentItem(nextIndex); // Use setCurrentItem
       } else {
         // If we've reached the end of the items, stay on the last item
-        setCurrentItemIndex(nihssItems.length - 1);
+        setCurrentItem(nihssItems.length - 1); // Use setCurrentItem
       }
     }
   };
@@ -570,7 +549,7 @@ const App = () => {
                     disabled={
                       (isComaState && autoFillComaItems.includes(currentItem.id) && currentItem.id !== '1A') || // Deshabilitar por auto-llenado de coma
                       (isStuporState && autoFillStuporItems.includes(currentItem.id) && currentItem.id !== '1A') || // Deshabilitar por auto-llenado de estupor
-                      nihssItems.indexOf(currentItem) < currentItemIndex // Deshabilitar ítems anteriores
+                      nihssItems[currentItemIndex].id !== currentItem.id // Deshabilitar ítems anteriores o si no es el actual
                     }
                   />
                   <span className={`ml-3 text-gray-800 text-base ${option.isPrimary ? 'font-semibold' : ''}`}> {/* Texto más grande y oscuro */}
@@ -667,6 +646,5 @@ const App = () => {
     </div>
   );
 };
-
 
 export default App;
