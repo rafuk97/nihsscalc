@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "https://rafuk97.github.io/nihsscalc/static/css/main.e6c13ad2.css",
+    "main.css": "https://rafuk97.github.io/nihsscalc/static/css/main.28594e00.css",
     "main.js": "https://rafuk97.github.io/nihsscalc/static/js/main.84fb504f.js",
     "static/js/453.3153202a.chunk.js": "https://rafuk97.github.io/nihsscalc/static/js/453.3153202a.chunk.js",
     "static/media/image.png": "https://rafuk97.github.io/nihsscalc/static/media/image.35cfc4cc5548eae82c41.png",
@@ -8,12 +8,12 @@
     "static/media/image2.png": "https://rafuk97.github.io/nihsscalc/static/media/image2.799235a33a5312b0d7c0.png",
     "static/media/image3.png": "https://rafuk97.github.io/nihsscalc/static/media/image3.6d4abd43e373d22ae99e.png",
     "index.html": "https://rafuk97.github.io/nihsscalc/index.html",
-    "main.e6c13ad2.css.map": "https://rafuk97.github.io/nihsscalc/static/css/main.e6c13ad2.css.map",
+    "main.28594e00.css.map": "https://rafuk97.github.io/nihsscalc/static/css/main.28594e00.css.map",
     "main.84fb504f.js.map": "https://rafuk97.github.io/nihsscalc/static/js/main.84fb504f.js.map",
     "453.3153202a.chunk.js.map": "https://rafuk97.github.io/nihsscalc/static/js/453.3153202a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e6c13ad2.css",
+    "static/css/main.28594e00.css",
     "static/js/main.84fb504f.js"
   ]
 }
