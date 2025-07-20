@@ -174,7 +174,7 @@ const nihssItems = [
     // ¡IMPORTANTE! Asegúrate de que los nombres de archivo en tu carpeta public/images/
     // coincidan EXACTAMENTE con estos (incluyendo mayúsculas/minúsculas).
     // Por ejemplo, si tu archivo se llama "Image.png", cámbialo a "image.png" o viceversa.
-    image: '/images/image.png', // Tarea 1 del ítem 9
+    image: '/images/temp_image.png', // Tarea 1 del ítem 9
     image2: '/images/image1.png', // Tarea 2 del ítem 9
     image3: '/images/image2.png', // Tarea 3 del ítem 9
   },
