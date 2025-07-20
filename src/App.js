@@ -170,9 +170,10 @@ const nihssItems = [
       { optionValue: '9_3_estupor', scoreValue: 3, label: '3: Estupor que no obedece órdenes' },
       { optionValue: '9_3_coma', scoreValue: 3, label: '3: Coma' },
     ],
-    image: 'https://img.notionusercontent.com/s3/prod-files-secure%2Fb60b5aea-9603-4551-b7bd-c6899e30e15e%2F0516c345-ca1a-48e3-8ace-5e0e8f61d358%2Fimage.png/size/w=1420?exp=1753076750&sig=2WvajP0Be1OmqyzSz6T7pK4t9RdBWOc1j5m2iCk5IHw&id=236b12ba-62d9-8024-b054-f498295d0e0c&table=block', // Tarea 1 del ítem 9
-    image2: 'https://rafabeta.notion.site/image/attachment%3Af67526fb-98d3-45d7-8ab2-63600b512821%3Aimage.png?table=block&id=236b12ba-62d9-802e-b9af-de86a340200c&spaceId=b60b5aea-9603-4551-b7bd-c6899e30e15e&width=1180&userId=&cache=v2', // Tarea 2 del ítem 9
-    image3: 'https://rafabeta.notion.site/image/attachment%3Ab8e5e263-ac7d-4f71-9bfe-db38a296a459%3Aimage.png?table=block&id=236b12ba-62d9-80ed-89c1-fc8d7aee9d42&spaceId=b60b5aea-9603-4551-b7bd-c6899e30e15e&width=1020&userId=&cache=v2', // Tarea 3 del ítem 9
+    // RUTAS DE IMAGEN ACTUALIZADAS PARA CARPETA LOCAL EN PUBLIC/IMAGES
+    image: '/images/image.png', // Tarea 1 del ítem 9
+    image2: '/images/image1.png', // Tarea 2 del ítem 9
+    image3: '/images/image2.png', // Tarea 3 del ítem 9
   },
   {
     id: '10',
@@ -186,7 +187,8 @@ const nihssItems = [
       { optionValue: '10_2_coma', scoreValue: 2, label: '2: Coma' },
       { optionValue: '10_NA', scoreValue: 'NA', label: 'NA: IOT/barrera física', isPrimary: true },
     ],
-    image: 'https://rafabeta.notion.site/image/attachment%3A3da00c80-da57-463e-ad67-3a2f9fc6e52b%3Aimage.png?table=block&id=236b12ba-62d9-80b0-8d34-cc45caad9a20&spaceId=b60b5aea-9603-4551-b7bd-c6899e30e15e&width=1170&userId=&cache=v2', // Imagen del ítem 10
+    // RUTA DE IMAGEN ACTUALIZADA PARA CARPETA LOCAL EN PUBLIC/IMAGES
+    image: '/images/image3.png', // Imagen del ítem 10
   },
   {
     id: '11',
@@ -237,6 +239,9 @@ const ImageViewer = ({ imageUrl, onClose }) => {
 
 // Componente principal de la aplicación NIHSS
 const App = () => {
+  // Estado para controlar la visibilidad de la pantalla de instrucciones
+  const [showInstructions, setShowInstructions] = useState(true);
+
   // Estado para almacenar los puntajes seleccionados por el usuario (almacena optionValue)
   const [selectedOptions, setSelectedOptions] = useState({});
   // Estado para el puntaje total acumulado
@@ -248,7 +253,7 @@ const App = () => {
   // Referencia para el modal de informe
   const reportModalRef = useRef(null);
   // Estado para el índice del ítem actual que se muestra
-  const [currentItemIndex, setCurrentItem] = useState(0); // Renamed for clarity
+  const [currentItemIndex, setCurrentItem] = useState(0);
 
   // Estado para la URL de la imagen a mostrar en pantalla completa
   const [fullScreenImageUrl, setFullScreenImageUrl] = useState(null);
@@ -382,7 +387,7 @@ const App = () => {
 
         // If the next item is NOT auto-filled by either coma or stupor, then it's a manual item.
         if (!isNextItemAutoFilledByComa && !isNextItemAutoFilledByStupor) {
-          setCurrentItem(nextIndex); // Use setCurrentItem
+          setCurrentItem(nextIndex);
           foundNextManualItem = true;
           break; // Exit the loop once a manual item is found
         }
@@ -393,10 +398,10 @@ const App = () => {
     // If no specific auto-fill jump happened (either not in coma/stupor, or all subsequent items are auto-filled)
     if (!foundNextManualItem) {
       if (nextIndex < nihssItems.length) {
-        setCurrentItem(nextIndex); // Use setCurrentItem
+        setCurrentItem(nextIndex);
       } else {
         // If we've reached the end of the items, stay on the last item
-        setCurrentItem(nihssItems.length - 1); // Use setCurrentItem
+        setCurrentItem(nihssItems.length - 1);
       }
     }
   };
@@ -482,160 +487,147 @@ const App = () => {
   const currentItem = nihssItems[currentItemIndex];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col items-center p-6 font-sans">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 flex flex-col items-center p-6 font-sans text-gray-100">
       {/* Las etiquetas <link> y <script> de Tailwind CSS y la fuente IBM Plex Sans
           han sido movidas a public/index.html para un correcto despliegue. */}
 
-      <div className="flex flex-col md:flex-row w-full max-w-6xl gap-6"> {/* Contenedor principal con flexbox y más espacio */}
-        {/* Contenido principal del formulario */}
-        <div className="bg-white p-8 rounded-2xl shadow-xl w-full md:w-2/3 mb-8 md:mb-0 transform transition-all duration-300 hover:scale-[1.005]"> {/* Más redondeado y sombra */}
-          <h1 className="text-4xl font-extrabold text-center text-blue-800 mb-8">Calculadora NIHSS</h1> {/* Título más grande y oscuro */}
+      {showInstructions ? (
+        <div className="flex flex-col items-center justify-center min-h-screen p-6">
+          <div className="bg-gray-800 p-8 rounded-2xl shadow-xl max-w-2xl w-full text-center transform transition-all duration-300 hover:scale-[1.005]">
+            <h1 className="text-4xl font-extrabold text-blue-300 mb-6">Instrucciones de la Escala NIHSS 🧠</h1>
+            <ul className="text-left text-gray-200 space-y-3 mb-8 text-lg leading-relaxed">
+              <li>• Consignar los ítems de la escala en el orden indicado.</li>
+              <li>• No se puede volver atrás para cambiar las puntuaciones.</li>
+              <li>• Seguir las instrucciones proporcionadas para cada ítem de la escala.</li>
+              <li>• Las puntuaciones deben reflejar lo que el paciente hace, no lo que el clínico cree que el paciente puede hacer.</li>
+              <li>• El clínico debe registrar las respuestas mientras administra el examen y trabajar rápidamente.</li>
+              <li>• Excepto donde se indique, el paciente no debe ser instruido (es decir, solicitudes repetidas al paciente para que haga un esfuerzo especial).</li>
+            </ul>
+            <button
+              onClick={() => setShowInstructions(false)}
+              className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition duration-300 ease-in-out transform hover:scale-105 text-lg focus:outline-none focus:ring-4 focus:ring-indigo-500"
+            >
+              Comenzar Evaluación
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div className="flex flex-col md:flex-row w-full max-w-6xl gap-6"> {/* Contenedor principal con flexbox y más espacio */}
+          {/* Contenido principal del formulario */}
+          <div className="bg-gray-800 p-8 rounded-2xl shadow-xl w-full md:w-2/3 mb-8 md:mb-0 transform transition-all duration-300 hover:scale-[1.005]"> {/* Más redondeado y sombra */}
+            <h1 className="text-4xl font-extrabold text-center text-blue-300 mb-8">Calculadora NIHSS 🧠</h1> {/* Título más grande y oscuro */}
 
-          {isComaState && (
-            <div className="bg-yellow-50 border-l-4 border-yellow-400 text-yellow-800 p-4 rounded-lg mb-6 shadow-sm"> {/* Estilo más suave */}
-              <p className="font-bold text-lg">¡Atención!</p>
-              <p className="text-sm">Ha seleccionado "Coma" en el Nivel de Conciencia (1A). Los puntajes para los ítems relacionados se han establecido automáticamente según los criterios de coma.</p>
-            </div>
-          )}
-          {isStuporState && (
-            <div className="bg-yellow-50 border-l-4 border-yellow-400 text-yellow-800 p-4 rounded-lg mb-6 shadow-sm"> {/* Estilo más suave */}
-              <p className="font-bold text-lg">¡Atención!</p>
-              <p className="text-sm">Ha seleccionado "Estupor" en el Nivel de Conciencia (1A). Los puntajes para los ítems 1B, 1C y 7 se han establecido automáticamente según los criterios de estupor.</p>
-            </div>
-          )}
-
-          {/* Mostrar solo el ítem actual */}
-          <div key={currentItem.id} className="mb-8 p-6 border border-blue-100 rounded-xl bg-white shadow-md"> {/* Más redondeado, sombra y borde azul suave */}
-            <h2 className="text-2xl font-semibold text-blue-700 mb-4">{currentItem.id}. {currentItem.name}</h2> {/* Título de ítem más grande y azul */}
-            {currentItem.description && (
-              <p className="text-gray-600 text-base mb-5 italic leading-relaxed">{currentItem.description}</p>
-            )}
-            {currentItem.image && (
-              <div className="mb-6 flex flex-col items-center space-y-4"> {/* Más espacio entre imágenes */}
-                <img
-                  src={currentItem.image}
-                  alt={`Imagen de ${currentItem.name} Tarea 1`}
-                  className="max-w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-200 hover:scale-[1.02]"
-                  onClick={() => setFullScreenImageUrl(currentItem.image)}
-                  onError={(e) => e.target.src = `https://placehold.co/600x400/D1D5DB/4B5563?text=Imagen+No+Disponible`}
-                />
-                {currentItem.image2 && <img
-                  src={currentItem.image2}
-                  alt={`Imagen de ${currentItem.name} Tarea 2`}
-                  className="max-w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-200 hover:scale-[1.02]"
-                  onClick={() => setFullScreenImageUrl(currentItem.image2)}
-                  onError={(e) => e.target.src = `https://placehold.co/600x400/D1D5DB/4B5563?text=Imagen+No+Disponible`}
-                />}
-                {currentItem.image3 && <img
-                  src={currentItem.image3}
-                  alt={`Imagen de ${currentItem.name} Tarea 3`}
-                  className="max-w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-200 hover:scale-[1.02]"
-                  onClick={() => setFullScreenImageUrl(currentItem.image3)}
-                  onError={(e) => e.target.src = `https://placehold.co/600x400/D1D5DB/4B5563?text=Imagen+No+Disponible`}
-                />}
+            {isComaState && (
+              <div className="bg-yellow-900/20 border-l-4 border-yellow-600 text-yellow-300 p-4 rounded-lg mb-6 shadow-sm"> {/* Estilo más suave */}
+                <p className="font-bold text-lg">¡Atención!</p>
+                <p className="text-sm">Ha seleccionado "Coma" en el Nivel de Conciencia (1A). Los puntajes para los ítems relacionados se han establecido automáticamente según los criterios de coma.</p>
               </div>
             )}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4"> {/* Más espacio entre opciones */}
-              {currentItem.options.map((option, index) => (
-                <label key={option.optionValue} className="flex items-center p-4 bg-blue-50 rounded-lg shadow-sm cursor-pointer hover:bg-blue-100 transition duration-200 ease-in-out border border-blue-200"> {/* Fondo azul claro, borde */}
-                  <input
-                    type="radio"
-                    name={`item-${currentItem.id}`}
-                    value={option.optionValue} // Usar optionValue único
-                    checked={selectedOptions[currentItem.id] === option.optionValue}
-                    onChange={() => handleChange(currentItem.id, option.optionValue, option.label, option.scoreValue)}
-                    className="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 border-gray-300"
-                    // Deshabilitar solo si está en coma/estupor (auto-llenado) o si es un ítem anterior
-                    disabled={
-                      (isComaState && autoFillComaItems.includes(currentItem.id) && currentItem.id !== '1A') || // Deshabilitar por auto-llenado de coma
-                      (isStuporState && autoFillStuporItems.includes(currentItem.id) && currentItem.id !== '1A') || // Deshabilitar por auto-llenado de estupor
-                      nihssItems[currentItemIndex].id !== currentItem.id // Deshabilitar ítems anteriores o si no es el actual
-                    }
+            {isStuporState && (
+              <div className="bg-yellow-900/20 border-l-4 border-yellow-600 text-yellow-300 p-4 rounded-lg mb-6 shadow-sm"> {/* Estilo más suave */}
+                <p className="font-bold text-lg">¡Atención!</p>
+                <p className="text-sm">Ha seleccionado "Estupor" en el Nivel de Conciencia (1A). Los puntajes para los ítems 1B, 1C y 7 se han establecido automáticamente según los criterios de estupor.</p>
+              </div>
+            )}
+
+            {/* Mostrar solo el ítem actual sin cuadro adicional */}
+            <div key={currentItem.id} className="mb-8 p-6"> {/* Eliminado border, rounded-xl, bg-white, shadow-md */}
+              <h2 className="text-2xl font-semibold text-blue-300 mb-4">{currentItem.id}. {currentItem.name}</h2> {/* Título de ítem más grande y azul */}
+              {currentItem.description && (
+                <p className="text-gray-300 text-base mb-5 italic leading-relaxed">{currentItem.description}</p>
+              )}
+              {currentItem.image && (
+                <div className="mb-6 flex flex-col items-center space-y-4"> {/* Más espacio entre imágenes */}
+                  <img
+                    src={currentItem.image}
+                    alt={`Imagen de ${currentItem.name} Tarea 1`}
+                    className="max-w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-200 hover:scale-[1.02]"
+                    onClick={() => setFullScreenImageUrl(currentItem.image)}
+                    onError={(e) => e.target.src = `https://placehold.co/600x400/374151/F9FAFB?text=Imagen+No+Disponible`}
                   />
-                  <span className={`ml-3 text-gray-800 text-base ${option.isPrimary ? 'font-semibold' : ''}`}> {/* Texto más grande y oscuro */}
-                    {option.label}
-                  </span>
-                </label>
-              ))}
-            </div>
-            {selectedOptions[currentItem.id] !== undefined && (
-              <p className="mt-4 text-right text-lg font-bold text-blue-700"> {/* Puntaje más grande y en negrita */}
-                Puntaje para {currentItem.id}: {getScoreValue(currentItem.id, selectedOptions[currentItem.id]) === 'NA' ? 'NA' : getScoreValue(currentItem.id, selectedOptions[currentItem.id])}
-              </p>
-            )}
-          </div>
-
-          <div className="mt-8 flex justify-center"> {/* Centrar el botón */}
-            {currentItemIndex < nihssItems.length - 1 && (
-              <button
-                onClick={handleNext}
-                className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition duration-300 ease-in-out transform hover:scale-105 w-full text-lg focus:outline-none focus:ring-4 focus:ring-blue-300" // Más grande, más padding, foco
-              >
-                Siguiente Ítem
-              </button>
-            )}
-
-            {currentItemIndex === nihssItems.length - 1 && (
-              <button
-                onClick={generateReport}
-                className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition duration-300 ease-in-out transform hover:scale-105 w-full text-lg focus:outline-none focus:ring-4 focus:ring-green-300" // Más grande, más padding, foco
-              >
-                Generar Informe Final
-              </button>
-            )}
-          </div>
-        </div>
-
-        {/* Sidebar para el puntaje en tiempo real */}
-        <div className="bg-white p-8 rounded-2xl shadow-xl w-full md:w-1/3"> {/* Más redondeado y sombra */}
-          <h2 className="text-3xl font-bold text-center text-blue-800 mb-6">Puntajes NIHSS</h2> {/* Título más grande y oscuro */}
-          <div className="max-h-[calc(100vh-200px)] overflow-y-auto pr-2"> {/* Altura ajustada y scroll */}
-            {nihssItems.map(item => {
-              const selectedOptionValue = selectedOptions[item.id];
-              const score = selectedOptionValue !== undefined ? getScoreValue(item.id, selectedOptionValue) : undefined;
-              return (
-                <p key={item.id} className="text-gray-700 text-base mb-2"> {/* Texto más grande */}
-                  <span className="font-semibold text-blue-600">Ítem {item.id}:</span> {score === undefined ? 'No seleccionado' : (score === 'NA' ? 'No aplicable' : `${score} puntos`)}
+                  {currentItem.image2 && <img
+                    src={currentItem.image2}
+                    alt={`Imagen de ${currentItem.name} Tarea 2`}
+                    className="max-w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-200 hover:scale-[1.02]"
+                    onClick={() => setFullScreenImageUrl(currentItem.image2)}
+                    onError={(e) => e.target.src = `https://placehold.co/600x400/374151/F9FAFB?text=Imagen+No+Disponible`}
+                  />}
+                  {currentItem.image3 && <img
+                    src={currentItem.image3}
+                    alt={`Imagen de ${currentItem.name} Tarea 3`}
+                    className="max-w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-200 hover:scale-[1.02]"
+                    onClick={() => setFullScreenImageUrl(currentItem.image3)}
+                    onError={(e) => e.target.src = `https://placehold.co/600x400/374151/F9FAFB?text=Imagen+No+Disponible`}
+                  />}
+                </div>
+              )}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4"> {/* Más espacio entre opciones */}
+                {currentItem.options.map((option, index) => (
+                  <label key={option.optionValue} className="flex items-center p-4 bg-gray-700/50 rounded-lg shadow-sm cursor-pointer hover:bg-gray-600 transition duration-200 ease-in-out border border-gray-600"> {/* Fondo oscuro, borde */}
+                    <input
+                      type="radio"
+                      name={`item-${currentItem.id}`}
+                      value={option.optionValue} // Usar optionValue único
+                      checked={selectedOptions[currentItem.id] === option.optionValue}
+                      onChange={() => handleChange(currentItem.id, option.optionValue, option.label, option.scoreValue)}
+                      className="form-radio h-5 w-5 text-blue-400 rounded-full focus:ring-blue-500 border-gray-500"
+                      // Deshabilitar solo si está en coma/estupor (auto-llenado) o si es un ítem anterior
+                      disabled={
+                        (isComaState && autoFillComaItems.includes(currentItem.id) && currentItem.id !== '1A') || // Deshabilitar por auto-llenado de coma
+                        (isStuporState && autoFillStuporItems.includes(currentItem.id) && currentItem.id !== '1A') || // Deshabilitar por auto-llenado de estupor
+                        nihssItems[currentItemIndex].id !== currentItem.id // Deshabilitar ítems anteriores o si no es el actual
+                      }
+                    />
+                    <span className={`ml-3 text-gray-100 text-base ${option.isPrimary ? 'font-semibold' : ''}`}> {/* Texto más grande y claro */}
+                      {option.label}
+                    </span>
+                  </label>
+                ))}
+              </div>
+              {selectedOptions[currentItem.id] !== undefined && (
+                <p className="mt-4 text-right text-lg font-bold text-blue-300"> {/* Puntaje más grande y en negrita */}
+                  Puntaje para {currentItem.id}: {getScoreValue(currentItem.id, selectedOptions[currentItem.id]) === 'NA' ? 'NA' : getScoreValue(currentItem.id, selectedOptions[currentItem.id])}
                 </p>
-              );
-            })}
-          </div>
-          <div className="mt-8 p-6 bg-blue-700 text-white rounded-xl shadow-md text-center"> {/* Fondo azul más oscuro y redondeado */}
-            <h2 className="text-3xl font-bold">Puntaje Total: {totalScore}</h2> {/* Puntaje más grande */}
-          </div>
-        </div>
-      </div>
+              )}
+            </div>
 
+            <div className="mt-8 flex justify-center"> {/* Centrar el botón */}
+              {currentItemIndex < nihssItems.length - 1 && (
+                <button
+                  onClick={handleNext}
+                  className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition duration-300 ease-in-out transform hover:scale-105 w-full text-lg focus:outline-none focus:ring-4 focus:ring-indigo-500" // Más grande, más padding, foco
+                >
+                  Siguiente Ítem
+                </button>
+              )}
 
-      {showReport && (
-        <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50 p-4">
-          <div ref={reportModalRef} className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md mx-4 transform transition-all duration-300 scale-100"> {/* Más redondeado y sombra */}
-            <h3 className="text-3xl font-bold text-blue-700 mb-5 text-center">Informe Resumido NIHSS</h3> {/* Título más grande */}
-            <div className="max-h-80 overflow-y-auto mb-6 p-4 border border-blue-100 rounded-lg bg-gray-50"> {/* Borde y fondo suave */}
+              {currentItemIndex === nihssItems.length - 1 && (
+                <button
+                  onClick={generateReport}
+                  className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition duration-300 ease-in-out transform hover:scale-105 w-full text-lg focus:outline-none focus:ring-4 focus:ring-green-500" // Más grande, más padding, foco
+                >
+                  Generar Informe Final
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Sidebar para el puntaje en tiempo real */}
+          <div className="bg-gray-800 p-8 rounded-2xl shadow-xl w-full md:w-1/3"> {/* Más redondeado y sombra */}
+            <h2 className="text-3xl font-bold text-center text-blue-300 mb-6">Puntajes NIHSS</h2> {/* Título más grande y oscuro */}
+            <div className="max-h-[calc(100vh-200px)] overflow-y-auto pr-2"> {/* Altura ajustada y scroll */}
               {nihssItems.map(item => {
                 const selectedOptionValue = selectedOptions[item.id];
                 const score = selectedOptionValue !== undefined ? getScoreValue(item.id, selectedOptionValue) : undefined;
                 return (
-                  <p key={item.id} className="text-gray-800 text-base mb-1">
-                    <span className="font-semibold text-blue-600">Ítem {item.id}:</span> {score === 'NA' ? 'No aplicable.' : `${score} puntos.`}
+                  <p key={item.id} className="text-gray-300 text-base mb-2"> {/* Texto más grande */}
+                    <span className="font-semibold text-blue-400">Ítem {item.id}:</span> {score === undefined ? 'No seleccionado' : (score === 'NA' ? 'No aplicable' : `${score} puntos`)}
                   </p>
                 );
               })}
-              <p className="text-xl font-bold text-blue-700 mt-4 pt-4 border-t border-blue-200">Puntaje Total NIHSS: {totalScore}</p> {/* Separador y texto más grande */}
             </div>
-            <div className="flex justify-end space-x-4"> {/* Más espacio entre botones */}
-              <button
-                onClick={copyReportToClipboard}
-                className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded-lg shadow-md transition duration-200 ease-in-out focus:outline-none focus:ring-4 focus:ring-blue-300"
-              >
-                Copiar Informe
-              </button>
-              <button
-                onClick={closeReportModal}
-                className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-5 rounded-lg shadow-md transition duration-200 ease-in-out focus:outline-none focus:ring-4 focus:ring-red-300"
-              >
-                Cerrar
-              </button>
+            <div className="mt-8 p-6 bg-indigo-700 text-white rounded-xl shadow-md text-center"> {/* Fondo azul más oscuro y redondeado */}
+              <h2 className="text-3xl font-bold">Puntaje Total: {totalScore}</h2> {/* Puntaje más grande */}
             </div>
           </div>
         </div>
