@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "https://rafuk97.github.io/nihsscalc/static/css/main.cecc9ff7.css",
-    "main.js": "https://rafuk97.github.io/nihsscalc/static/js/main.61a4ebf7.js",
+    "main.css": "https://rafuk97.github.io/nihsscalc/static/css/main.baa939b2.css",
+    "main.js": "https://rafuk97.github.io/nihsscalc/static/js/main.2ec1ba4a.js",
     "static/js/453.3153202a.chunk.js": "https://rafuk97.github.io/nihsscalc/static/js/453.3153202a.chunk.js",
     "index.html": "https://rafuk97.github.io/nihsscalc/index.html",
-    "main.cecc9ff7.css.map": "https://rafuk97.github.io/nihsscalc/static/css/main.cecc9ff7.css.map",
-    "main.61a4ebf7.js.map": "https://rafuk97.github.io/nihsscalc/static/js/main.61a4ebf7.js.map",
+    "main.baa939b2.css.map": "https://rafuk97.github.io/nihsscalc/static/css/main.baa939b2.css.map",
+    "main.2ec1ba4a.js.map": "https://rafuk97.github.io/nihsscalc/static/js/main.2ec1ba4a.js.map",
     "453.3153202a.chunk.js.map": "https://rafuk97.github.io/nihsscalc/static/js/453.3153202a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.cecc9ff7.css",
-    "static/js/main.61a4ebf7.js"
+    "static/css/main.baa939b2.css",
+    "static/js/main.2ec1ba4a.js"
   ]
 }
